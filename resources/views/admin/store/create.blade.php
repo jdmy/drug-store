@@ -24,20 +24,31 @@
                         <input type="text" name="address" class="form-control" required="required" placeholder="请输入地址"></input>
                         <br>
                         <label>省份</label>
-                        <select name="provinceid">
+                        <select name="provinceid" onclick="test()" id="province">
                             @foreach ($provinces as $province)
                               <option value ="{{ $province->provinceid }}">{{ $province->province }}</option>
                             @endforeach
                         </select>
                         <label>城市</label>
-                        <select name="cityid">
-                            @foreach ($provinces as $province)
-                              <option value ="{{ $province->provinceid }}">{{ $province->province }}</option>
-                            @endforeach
+                        <select name="cityid" id="city">
+                            
                         </select>
                         <br>
                         <button class="btn btn-lg btn-info">新增药店</button>
                     </form>
+                    <script type="text/javascript">
+                        $("#province").change(function(e){
+                            $.ajax({
+                                type:'get',
+                                dataType:"text",
+                                url: 'ajax/cities/'+e.target.value,
+                                success: function(data){
+                                    $('#city').html(data);
+                                    console.log(data)
+                                }
+                                });
+                            })
+                    </script>
 
                 </div>
             </div>

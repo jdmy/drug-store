@@ -26,6 +26,10 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
         Route::resource('stores', 'StoreController');
         Route::get('users', 'UserController@index');
         Route::delete('users/{id}', 'UserController@destroy');
+        Route::any('stores/ajax/cities/{provinceid}','StoreController@city_ajax');
+        Route::get('product_images/{pid}','ProductImageController@index');
+        Route::post('product_images/{pid}','ProductImageController@upload');
+        Route::delete('product_images/{pid}/{id}','ProductImageController@destroy');
     });
     $router->get('login', 'LoginController@showLoginForm')->name('admin.login');
     $router->post('login', 'LoginController@login');

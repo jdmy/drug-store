@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Store extends Model
+class ProductImage extends Model
 {
-    public $timestamps = false;
+    //
 }

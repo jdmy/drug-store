@@ -34,6 +34,7 @@
                             <label>是否为非处方药</label>{{ $product->is_otc }}<br>
                             <label>种类:</label>{{ $product->category->name }}<br>
                             <a href="{{ url('admin/products/'.$product->id.'/edit') }}" class="btn btn-success">编辑</a>
+                            <a href="{{ url('admin/product_images/'.$product->id) }}" class="btn btn-success">编辑图片</a>
                             <form action="{{ url('admin/products/'.$product->id) }}" method="POST" style="display: inline;">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
