@@ -16,18 +16,21 @@
 // });
 
 Auth::routes();
-
 Route::get('/', 'CategoryController@index')->name('home');
 Route::get('/categories/{cid}/products', 'ProductController@index');
 Route::get('/products/{id}', 'ProductController@showbyone');
-Route::post('/order_items', 'OrderItemController@store');
-Route::get('/order_items', 'OrderItemController@index');
-Route::delete('/order_items/{id}', 'OrderItemController@destroy');
-Route::get('/orders/create','OrderController@create');
-Route::get('/orders','OrderController@index');
-Route::post('/orders','OrderController@store');
 Route::get('/stores', 'StoreController@index');
 
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/order_items', 'OrderItemController@store');
+    Route::get('/order_items', 'OrderItemController@index');
+    Route::delete('/order_items/{id}', 'OrderItemController@destroy');
+    Route::get('/orders/create','OrderController@create');
+    Route::get('/orders','OrderController@index');
+    Route::post('/orders','OrderController@store');
+    Route::post('/pay','OrderController@pay');
+});
 Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
 {
 	Route::group(['middleware' => 'auth.admin:admin'], function () {

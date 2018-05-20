@@ -4,6 +4,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+            <?php $total=0; ?>
+            <table class="table table-bordered">
+              <tr>
+                <th>药品名</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>金额</th>
+              </tr>
+            @foreach ($order_items as $order_item)
+                <tr>
+                    <td>{{$order_item->product->name}}</td>
+                    <td>{{$order_item->product->price}}</td>
+                    <td>{{$order_item->number}}</td>
+                    <td>{{$order_item->number*$order_item->product->price}}</td>
+                </tr>
+                <?php $total+=$order_item->number*$order_item->product->price; ?>
+            @endforeach
+            </table>
+            <lable>总金额:{{ $total }}</lable><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">输入订单信息</div>
                 <div class="panel-body">
@@ -25,6 +48,7 @@
                         <br>
                         <input type="text" name="userMessage" class="form-control" required="required" placeholder="请输入留言">
                         <br>
+                        <input type="text" name="total" value="{{ $total }}" hidden="true">
                         <button class="btn btn-lg btn-info">提交订单</button>
                     </form>
 
@@ -32,30 +56,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <?php $total=0; ?>
-            <table class="table table-bordered">
-              <tr>
-                <th>药品名</th>
-                <th>单价</th>
-                <th>数量</th>
-                <th>金额</th>
-              </tr>
-            @foreach ($order_items as $order_item)
-                <tr>
-                    <td>{{$order_item->product->name}}</td>
-                    <td>{{$order_item->product->price}}</td>
-                    <td>{{$order_item->number}}</td>
-                    <td>{{$order_item->number*$order_item->product->price}}</td>
-                </tr>
-                <?php $total+=$order_item->number*$order_item->product->price; ?>
-            @endforeach
-            </table>
-            <lable>总金额:{{ $total }}</lable><br>
-            
-        </div>
-        
-    </div>
+    
 </div>
 @endsection

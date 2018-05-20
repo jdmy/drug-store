@@ -31,6 +31,7 @@
             @endforeach
             </table>
             <lable>总金额:{{ $total }}</lable><br>
+            <a href="{{ url('orders/create') }}" class="btn btn-danger">创建订单</a>
 
         </div>
         

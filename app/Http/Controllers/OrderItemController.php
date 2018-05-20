@@ -8,13 +8,17 @@ class OrderItemController extends Controller
 {
     public function index(Request $request)
 	{
-		$data['order_items']=\App\User::find($request->user()->id)->order_items;
+		$data['order_items']=\App\OrderItem::where('uid', $request->user()->id)
+	    					->where('oid', null)
+	    					->get();
 	    return view('order_item/index',$data);
 	}
 
 	public function store(Request $request)
 	{
-		$order_items=\App\User::find($request->user()->id)->order_items;
+		$order_items=\App\OrderItem::where('uid', $request->user()->id)
+	    					->where('oid', null)
+	    					->get();
 		$order_item="";
 		foreach ($order_items as $o_item) {
 			if($o_item->pid == $request->get('pid')){
