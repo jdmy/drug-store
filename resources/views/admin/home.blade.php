@@ -11,6 +11,7 @@
                     <a href="{{ url('/admin/products') }}" class="btn btn-lg btn-info">管理药品</a>
                     <a href="{{ url('/admin/users') }}" class="btn btn-lg btn-info">管理用户</a>
                     <a href="{{ url('/admin/stores') }}" class="btn btn-lg btn-info">管理药店地址</a>
+                    <a href="{{ url('/admin/tags') }}" class="btn btn-lg btn-info">管理标签</a>
                 </div>
             </div>
         </div>

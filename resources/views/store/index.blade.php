@@ -13,6 +13,40 @@
                         </div>
                     @endif
 
+                    <select name="provinceid" id="province">
+                        @foreach ($provinces as $province)
+                          <option value ="{{ $province->provinceid }}">{{ $province->province }}</option>
+                        @endforeach
+                    </select>
+                    <label>城市</label>
+                    <select name="cityid" id="city">
+
+                    </select>
+                    <script type="text/javascript">
+                        $("#province").change(function(e){
+                            $.ajax({
+                                type:'get',
+                                dataType:"text",
+                                url: 'admin/stores/ajax/cities/'+e.target.value,
+                                success: function(data){
+                                    $('#city').html(data);
+                                    console.log(data)
+                                }
+                            });
+                        })
+                        $("#city").blur(function(e){
+                            var div1s=document.querySelectorAll('[data-city]');
+                            for(var i=0,j=div1s.length;i<j;i++){
+                                div1s[i].style.display="none";
+                            }
+                            var div2s=document.querySelectorAll("[data-city='"+e.target.value+"']");
+                            for(var i=0,j=div2s.length;i<j;i++){
+                                div2s[i].style.display="";
+                            }
+                        })
+                    </script>
+
+
                     <table class="table table-bordered">
                       <tr>
                         <th>店铺名称</th>
@@ -20,7 +54,7 @@
                         <th>地址</th>
                       </tr>
                     @foreach ($stores as $store)
-                        <tr>
+                        <tr data-province="{{ $store->city->province->provinceid }}" data-city="{{ $store->city->cityid }}">
                             <td>{{$store->name}}</td>
                             <td>{{$store->phone}}</td>
                             <td>{{ $store->city->province->province.$store->city->city.$store->address}}</td>

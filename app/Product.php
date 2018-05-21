@@ -15,4 +15,9 @@ class Product extends Model
     {
         return $this->hasMany('\App\ProductImage', 'pid', 'id');
     }
+
+    public function tags()
+    {
+    	return $this->belongsToMany('\App\Tag', 'product_tag', 'pid', 'tid');
+    }
 }

@@ -20,7 +20,7 @@ Route::get('/', 'CategoryController@index')->name('home');
 Route::get('/categories/{cid}/products', 'ProductController@index');
 Route::get('/products/{id}', 'ProductController@showbyone');
 Route::get('/stores', 'StoreController@index');
-
+Route::post('/search','TagController@search');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/order_items', 'OrderItemController@store');
@@ -38,10 +38,21 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
         Route::resource('stores', 'StoreController');
         Route::get('users', 'UserController@index');
         Route::delete('users/{id}', 'UserController@destroy');
+
+        Route::get('tags','TagController@index');
+        Route::get('tags/create','TagController@create');
+        Route::post('tags','TagController@store');
+        Route::delete('tags/{id}', 'TagController@destroy');
+        Route::get('product_tag/{id}','TagController@product_tag_edit');
+        Route::post('product_tag/{id}','TagController@product_tag_store');
+        Route::delete('product_tag/{pid}','TagController@product_tag_destroy');
+
         Route::any('stores/ajax/cities/{provinceid}','StoreController@city_ajax');
         Route::get('product_images/{pid}','ProductImageController@index');
         Route::post('product_images/{pid}','ProductImageController@upload');
         Route::delete('product_images/{pid}/{id}','ProductImageController@destroy');
+
+        Route::post('/search','TagController@search');
     });
     $router->get('login', 'LoginController@showLoginForm')->name('admin.login');
     $router->post('login', 'LoginController@login');

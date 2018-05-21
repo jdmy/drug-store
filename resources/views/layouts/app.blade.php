@@ -47,6 +47,13 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+                        <form action="{{ url('search') }}" class="navbar-form navbar-left" method="post">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                              <input type="text"  name="content" class="form-control" placeholder="Search">
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                          </form>
                         <li><a class="nav-link" href="{{ url('stores') }}">线下门店</a></li>
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>

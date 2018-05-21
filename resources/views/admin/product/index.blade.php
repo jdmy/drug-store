@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+    <div>
+        <form action="{{ url('admin/search') }}" class="navbar-form navbar-left" method="post">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                              <input type="text"  name="content" class="form-control" placeholder="Search">
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                          </form>
+    </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -35,6 +44,7 @@
                             <label>种类:</label>{{ $product->category->name }}<br>
                             <a href="{{ url('admin/products/'.$product->id.'/edit') }}" class="btn btn-success">编辑</a>
                             <a href="{{ url('admin/product_images/'.$product->id) }}" class="btn btn-success">编辑图片</a>
+                            <a href="{{ url('admin/product_tag/'.$product->id) }}" class="btn btn-success">编辑标签</a>
                             <form action="{{ url('admin/products/'.$product->id) }}" method="POST" style="display: inline;">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
@@ -43,7 +53,7 @@
                         </div>
                         </div>
                     @endforeach
-
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

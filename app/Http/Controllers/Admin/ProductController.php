@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function index()
 	{
-		$data['products']=\App\Product::all();
+		$data['products']=\App\Product::simplePaginate(3);
 	    return view('admin/product/index',$data);
 	}
 
