@@ -42,6 +42,11 @@
         </div>
 
         <div class="col-md-7">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    {!! implode('<br>', $errors->all()) !!}
+                </div>
+            @endif
             <label>药品名称:</label>{{ $product->name }}<br>
             <label>价格:</label>{{ $product->price }}<br>
             <label>库存:</label>{{ $product->stock }}<br>
@@ -60,7 +65,7 @@
                 {{ csrf_field() }}
                 <input type="number" name="number">
                 <input type="text" name="pid" value="{{ $product->id }}" hidden="true">
-                <button>立即购买</button>
+                <button>加入购物车</button>
             </form>
         </div>
     </div>

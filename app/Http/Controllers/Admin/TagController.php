@@ -32,6 +32,7 @@ class TagController extends Controller
 
 	public function destroy($id)
     {
+        \App\Tag::find($id)->products()->detach();
         \App\Tag::find($id)->delete();
         return redirect()->back()->withInput()->withErrors('删除成功！');
     }
@@ -93,7 +94,7 @@ class TagController extends Controller
     		array_push($ids, $product['id']);
     	}
     	$data['products']=\App\Product::whereIn('id', $ids)->simplePaginate(3);
-
+        
     	return view('admin/product/index', $data);
     }
 

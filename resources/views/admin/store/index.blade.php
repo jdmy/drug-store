@@ -28,7 +28,7 @@
                             $.ajax({
                                 type:'get',
                                 dataType:"text",
-                                url: 'stores/ajax/cities/'+e.target.value,
+                                url: '{{ url('stores/ajax/cities/') }}'+'/'+e.target.value,
                                 success: function(data){
                                     $('#city').html(data);
                                     console.log(data)
@@ -54,7 +54,6 @@
                         <th>店铺名称</th>
                         <th>联系电话</th>
                         <th>地址</th>
-                        <th>编辑</th>
                         <th>删除</th>
                       </tr>
                     @foreach ($stores as $store)
@@ -62,7 +61,6 @@
                             <td>{{$store->name}}</td>
                             <td>{{$store->phone}}</td>
                             <td>{{ $store->city->province->province.$store->city->city.$store->address}}</td>
-                            <td><a href="{{ url('admin/stores/'.$store->id.'/edit') }}" class="btn btn-success">编辑</a></td>
                             <td><form action="{{ url('admin/stores/'.$store->id) }}" method="POST" style="display: inline;">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}

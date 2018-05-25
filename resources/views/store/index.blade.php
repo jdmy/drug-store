@@ -27,7 +27,7 @@
                             $.ajax({
                                 type:'get',
                                 dataType:"text",
-                                url: 'admin/stores/ajax/cities/'+e.target.value,
+                                url: 'stores/ajax/cities/'+e.target.value,
                                 success: function(data){
                                     $('#city').html(data);
                                     console.log(data)

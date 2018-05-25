@@ -37,7 +37,8 @@
     <div class="row">
         <!-- <pre>
             <?php 
-            echo var_dump($products)
+            if(isset($ids))
+            echo var_dump($ids)
             ?>
         </pre> -->
         @foreach ($products as $product)

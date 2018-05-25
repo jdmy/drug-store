@@ -50,7 +50,7 @@
                         <form action="{{ url('search') }}" class="navbar-form navbar-left" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
-                              <input type="text"  name="content" class="form-control" placeholder="Search">
+                              <input type="text"  name="content" class="form-control" placeholder="Search" value="@if (isset($last_search)){{ $last_search }}@endif">
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button>
                           </form>
@@ -87,6 +87,26 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <footer class="panel-footer">
+            <div class="container">
+                <div class="col-lg-5">
+                    <a href="">联系我们</a>
+                    <a href="">加入我们</a>
+                    <a href="">隐私声明</a>
+                </div>
+                <div class="col-lg-5  pull-right">
+                    服务热线：4000-000-000
+                </div>
+               
+               
+            </div>
+            <hr>
+            <div>
+                <div class="container text-center">
+                   XXXX连锁药店有限公司|网络经营许可证 京ICP备1000000号-12 @Copyright@2017-2018 XXXX版权所有
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

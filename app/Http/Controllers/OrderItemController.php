@@ -27,9 +27,14 @@ class OrderItemController extends Controller
 		}
 		if($order_item==""){
 		    $order_item = new \App\OrderItem;
+		    
 		    $order_item->number = $request->get('number');
 		    $order_item->pid = $request->get('pid');
 		    $order_item->uid = $request->user()->id;
+		    if($order_item->number>($order_item->product->stock))
+		    {
+		    	return redirect()->back()->withInput()->withErrors('库存不足！');
+		    }
 	    }
 	    else{
 	    	$order_item->number+=$request->get('number');

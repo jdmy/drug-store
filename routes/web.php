@@ -20,7 +20,9 @@ Route::get('/', 'CategoryController@index')->name('home');
 Route::get('/categories/{cid}/products', 'ProductController@index');
 Route::get('/products/{id}', 'ProductController@showbyone');
 Route::get('/stores', 'StoreController@index');
+Route::get('/search','TagController@search_get');
 Route::post('/search','TagController@search');
+Route::any('stores/ajax/cities/{provinceid}','Admin\StoreController@city_ajax');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/order_items', 'OrderItemController@store');
@@ -29,7 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/orders/create','OrderController@create');
     Route::get('/orders','OrderController@index');
     Route::post('/orders','OrderController@store');
-    Route::post('/pay','OrderController@pay');
+    Route::post('/pay/','OrderController@pay');
+    Route::get('/pay/{id}','OrderController@pay_index');
+    Route::get('/confirm/{id}','OrderController@confirm');
 });
 Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
 {
@@ -39,6 +43,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
         Route::get('users', 'UserController@index');
         Route::delete('users/{id}', 'UserController@destroy');
 
+        Route::get('orders','OrderController@index');
+        Route::post('orders/delivery/{id}','OrderController@delivery');
+
         Route::get('tags','TagController@index');
         Route::get('tags/create','TagController@create');
         Route::post('tags','TagController@store');
@@ -47,7 +54,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
         Route::post('product_tag/{id}','TagController@product_tag_store');
         Route::delete('product_tag/{pid}','TagController@product_tag_destroy');
 
-        Route::any('stores/ajax/cities/{provinceid}','StoreController@city_ajax');
+        
         Route::get('product_images/{pid}','ProductImageController@index');
         Route::post('product_images/{pid}','ProductImageController@upload');
         Route::delete('product_images/{pid}/{id}','ProductImageController@destroy');
